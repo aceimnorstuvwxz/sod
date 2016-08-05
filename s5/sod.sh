@@ -36,19 +36,19 @@ cp /home/dgk/sodwp/S0_0.wav.trn /home/dgk/sodwp/$wavid/
 local/sod_data_prep.sh $H $wavdir $wavid || exit 1;
 
 #produce MFCC features 
-# rm -rf data/mfcc/test && rm -rf data/mfcc/test_phone &&  cp -R data/{test,test_phone} data/mfcc || exit 1;
+ cp -R data/$wavid data/mfcc || exit 1;
 # for x in test; do
    #make  mfcc 
-#    steps/make_mfcc.sh --nj $n --cmd "$train_cmd" data/mfcc/$x exp/make_mfcc/$x mfcc/$x || exit 1;
+   steps/make_mfcc.sh --nj $n --cmd "$train_cmd" data/mfcc/$wavid exp/make_mfcc/$wavid mfcc/$wavid || exit 1;
    #compute cmvn
-#    steps/compute_cmvn_stats.sh data/mfcc/$x exp/mfcc_cmvn/$x mfcc/$x || exit 1;
+   steps/compute_cmvn_stats.sh data/mfcc/$wavid exp/mfcc_cmvn/$wavid mfcc/$wavid || exit 1;
 # done
 #copy feats and cmvn to test.ph, avoid duplicated mfcc & cmvn 
 # cp data/mfcc/test/feats.scp data/mfcc/test_phone && cp data/mfcc/test/cmvn.scp data/mfcc/test_phone || exit 1;
 
 
 #train dnn model
-# local/nnet/run_dnn_only_test.sh --stage 0 --nj $n  exp/tri4b exp/tri4b_ali exp/tri4b_ali_cv || exit 1;  
+local/nnet/run_dnn_sod.sh --stage 0 --nj $n  exp/tri4b exp/tri4b_ali exp/tri4b_ali_cv $wavid || exit 1;  
 
 #train dae model
 #python2.6 or above is required for noisy data generation.
