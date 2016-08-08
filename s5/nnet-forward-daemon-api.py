@@ -4,12 +4,12 @@
 import socket  
 import sys
 
-def runrun(pa, pb, pc):
-    address = ('localhost', 30001)  
+def runrun(pa, pb):
+    address = ('localhost', 30002)  
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
     s.connect(address)  
   
-    data = '"' + pa + '" "' + pb + '" "' + pc  +'"\n'  #must \n with daemon with \n needed
+    data = '"' + pa + '"' + ' ' + '"' + pb + '"\n'  #must \n with daemon with \n needed
     print 'send', data
 
     #s.send(data)
@@ -28,10 +28,10 @@ def runrun(pa, pb, pc):
 if __name__ == "__main__":
     usage = '''./latgen-faster-mapped-daemon-api.py  "ark:$dir/netout.1.ar" "ark:|gzip -c > $dir/lat.JOB.gz" '''
 
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 3:
         print usage
         exit()
 
-    runrun(sys.argv[1], sys.argv[2], sys.argv[3])
+    runrun(sys.argv[1], sys.argv[2])
         
   
