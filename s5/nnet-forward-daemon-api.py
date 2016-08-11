@@ -19,8 +19,8 @@ def runrun(pa, pb):
     #s.flush()
     print 'send done'
 
-    #ret = s.recv(512)
-    #print 'recv', ret
+    ret = s.recv(512)
+    print 'recv', ret
     s.send("")
     s.close()
     

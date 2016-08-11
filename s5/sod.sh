@@ -23,16 +23,8 @@ wavdir=/home/dgk/sodwp/$wavid
 
 
 
-#you can obtain the database by uncommting the following lines
-#[ -d $thchs ] || mkdir -p $thchs  || exit 1
-#echo "downloading THCHS30 at $thchs ..."
-#local/download_and_untar.sh $thchs  http://www.openslr.org/resources/18 data_thchs30  || exit 1
-#local/download_and_untar.sh $thchs  http://www.openslr.org/resources/18 resource      || exit 1
-#local/download_and_untar.sh $thchs  http://www.openslr.org/resources/18 test-noise    || exit 1
-
 #data preparation 
 #generate text, wav.scp, utt2pk, spk2utt
-cp /home/dgk/sodwp/S0_0.wav.trn /home/dgk/sodwp/$wavid/
 local/sod_data_prep.sh $H $wavdir $wavid || exit 1;
 
 #produce MFCC features 
