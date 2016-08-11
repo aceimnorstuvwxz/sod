@@ -35,7 +35,7 @@ for x in train dev test; do
       echo $uttid `sed -n 3p $corpus_dir/data/$nn.wav.trn` >> phone.txt
   done 
 
-  for nn in `find  $corpus_dir/$x/[N-Z].wav | sort -u | xargs -i basename {} .wav`; do
+  for nn in `find  $corpus_dir/$x/[N-Z]*.wav | sort -u | xargs -i basename {} .wav`; do
       spkid=`echo $nn | awk -F"_" '{print "" $1}'`
       spk_char=`echo $spkid | sed 's/\([A-Z]\).*/\1/'`
       spk_num=`echo $spkid | sed 's/[A-Z]\([0-9]\)/\1/'`
