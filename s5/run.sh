@@ -63,7 +63,7 @@ cp data/mfcc/test/feats.scp data/mfcc/test_phone && cp data/mfcc/test/cmvn.scp d
 #monophone
 steps/train_mono.sh --boost-silence 1.25 --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/mono || exit 1; 
 #test monophone model
-#local/thchs-30_decode.sh --mono true --nj $n "steps/decode.sh" exp/mono data/mfcc 
+local/thchs-30_decode.sh --mono true --nj $n "steps/decode.sh" exp/mono data/mfcc 
 
 #monophone_ali
 steps/align_si.sh --boost-silence 1.25 --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/mono exp/mono_ali || exit 1;
@@ -71,7 +71,7 @@ steps/align_si.sh --boost-silence 1.25 --nj $n --cmd "$train_cmd" data/mfcc/trai
 #triphone
 steps/train_deltas.sh --boost-silence 1.25 --cmd "$train_cmd" 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1 || exit 1;
 #test tri1 model
-#local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri1 data/mfcc 
+local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri1 data/mfcc 
 
 #triphone_ali
 steps/align_si.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri1 exp/tri1_ali || exit 1;
@@ -79,7 +79,7 @@ steps/align_si.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri1 
 #lda_mllt
 steps/train_lda_mllt.sh --cmd "$train_cmd" --splice-opts "--left-context=3 --right-context=3" 2500 15000 data/mfcc/train data/lang exp/tri1_ali exp/tri2b || exit 1;
 #test tri2b model
-#local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri2b data/mfcc 
+local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri2b data/mfcc 
 
 
 #lda_mllt_ali
@@ -88,7 +88,7 @@ steps/align_si.sh  --nj $n --cmd "$train_cmd" --use-graphs true data/mfcc/train 
 #sat
 steps/train_sat.sh --cmd "$train_cmd" 2500 15000 data/mfcc/train data/lang exp/tri2b_ali exp/tri3b || exit 1;
 #test tri3b model
-#local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri3b data/mfcc 
+local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri3b data/mfcc 
 
 #sat_ali
 steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri3b exp/tri3b_ali || exit 1;
@@ -96,7 +96,7 @@ steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tr
 #quick
 steps/train_quick.sh --cmd "$train_cmd" 4200 40000 data/mfcc/train data/lang exp/tri3b_ali exp/tri4b || exit 1;
 #test tri4b model
-#local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri4b data/mfcc 
+local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri4b data/mfcc 
 
 #quick_ali
 steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri4b exp/tri4b_ali || exit 1;
