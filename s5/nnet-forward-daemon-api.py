@@ -5,7 +5,7 @@ import socket
 import sys
 
 def runrun(pa, pb):
-    address = ('localhost', 30002)  
+    address = ('localhost', 1230)  
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
     s.connect(address)  
   

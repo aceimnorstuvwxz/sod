@@ -71,7 +71,6 @@ if [ $stage -le 2 ]; then
     data/fbank/train data/lang $srcdir ${srcdir}_denlats || exit 1;
 fi
 
-nj=1
 if [ $stage -le 3 ]; then
   outdir=exp/tri4b_dnn_mpe
   #Re-train the DNN by 3 iteration of MPE
