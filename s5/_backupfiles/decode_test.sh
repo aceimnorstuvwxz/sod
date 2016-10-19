@@ -168,8 +168,8 @@ apply-cmvn --norm-means=true --norm-vars=false --utt2spk=ark:$sdata/1/utt2spk sc
     #$model $graphdir/HCLG.fst "ark:$dir/netout.1.ar" "ark:|gzip -c > $dir/lat.JOB.gz" || exit 1;
 
 
-    ./latgen-faster-mapped-daemon-api.py  "ark:$dir/netout.1.ar" "ark:|gzip -c > $dir/lat.JOB.gz" "$dir/result.ar"
-
+    ./latgen-faster-mapped-daemon-api.py  "ark:$dir/netout.1.ar" "ark,t:$dir/lat.txt" "$dir/result.ar"
+    # change ark:|gzip to ark,t: no compress, in text mode
 fi
 
 # Run the scoring
